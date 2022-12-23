@@ -58,7 +58,6 @@ public class Main {
         System.out.println("Введите корректное число");
         return Product.scannerIn();
     }
-
     public static String endOfSum(float fsum) {
 
         int sum = (int)fsum;
