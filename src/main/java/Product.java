@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Product {
     String name;
     float priсe;
+    static Scanner input = new Scanner(System.in);
+
     Product (String name,float priсe){
         this.name=name;
         this.priсe=priсe;
@@ -23,8 +25,7 @@ public class Product {
     private static boolean checkForNormalNumber (String price){
         return price.matches("\\d+(|\\.)\\d{2}");
     }
-    private static String scannerIn(){
-        Scanner input = new Scanner(System.in);
+    public static String scannerIn(){
         return input.next();
     }
 

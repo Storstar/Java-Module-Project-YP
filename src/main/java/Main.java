@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class Main {
@@ -6,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("На скольких человек необходимо разделить счёт?");
-        String scountOfFriends = scannerIn();
+        String scountOfFriends = Product.scannerIn();
         int countOfFriends = isGoodCount(scountOfFriends);
 
         float sum = 0;
@@ -19,7 +18,7 @@ public class Main {
             listProducts.add(newProduct.name);
             String benchNow = String.format("Полная стоимость покупок: %.2f\nДобавленные товары:\n%s",sum,listProducts);
             System.out.println(benchNow + "\nДобавить еще товар?");
-            String stopIt = scannerIn();
+            String stopIt = Product.scannerIn();
             if (stopIt.equalsIgnoreCase("Завершить")) break;
         }
         String result = String.format("Вы потратили %.2f %s\nСписок покупок:\n%s\nВам нужно скинуться по %.2f %s",sum,endOfSum(sum),listProducts, sum / (float) countOfFriends, endOfSum((int) (sum / (float) countOfFriends)));
@@ -32,18 +31,14 @@ public class Main {
         System.out.println(outStr);
     }
 
-    public static String scannerIn(){
-        Scanner input = new Scanner(System.in);
-        return input.next();
-    }
-
     public static int isGoodCount(String scount) {
         while (true) {
             if (checkForChar(scount)) {
                 if (Integer.parseInt(scount) >= 1) {
                     if (Integer.parseInt(scount) == 1) {
-                        System.out.println("Вам одному оплачивать весь счет");
-                        System.exit(0);
+                        System.out.println("Вам одному оплачивать весь счет \nНа скольких человек необходимо разделить счёт?");
+                        scount = Product.scannerIn();
+                        continue;
                     } else System.out.println("Сейчас мы все посчитаем:");
                     break;
                 } else scount = isCorrectNum();
@@ -61,16 +56,16 @@ public class Main {
 
     public static String isCorrectNum() {
         System.out.println("Введите корректное число");
-        return scannerIn();
+        return Product.scannerIn();
     }
 
     public static String endOfSum(float fsum) {
+
         int sum = (int)fsum;
-    if (sum%10==1) return "рубль";
-    else
-    if ((sum%10==0)||(sum%100)/10==1||(sum%10>4)) return "рублей";
-    else
-        return "рубля";
+        if (sum % 100 >= 11 && sum % 100 <= 14) return "рублей";
+            if (sum % 10 == 1) return "рубль";
+            if (sum % 10 >= 2 && sum % 10 <= 4) return "рубля";
+            else return "рублей";
 
     }
 
